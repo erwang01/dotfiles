@@ -1,0 +1,38 @@
+[core]
+	pager = diff-so-fancy | less --tabs=4 -RF
+	editor = vim
+[interactive]
+	diffFilter = diff-so-fancy --patch
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	func = 146 bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[pager]
+	log = less --tabs=4 -RF
+[push]
+	autoSetupRemote = true
+[branch]
+	sort = -committerdate
+[user]
+	name = Eric Wang
+	email = eric.wang@benchling.com
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[alias]
+	logline = log --oneline --graph --decorate
+	fixup = "!git log --oneline -n 20 | fzf --header='Pick commit to fixup' | awk '{print $1}' | xargs -I{} git commit --fixup={} #"
+	sw = "!git branch --sort=-committerdate --format='%(refname:short)' | fzf --header='Switch branch' | xargs git switch #"
