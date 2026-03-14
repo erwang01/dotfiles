@@ -55,9 +55,9 @@ get_session_claude_status() {
 
 format_claude_status() {
   case "$1" in
-    working)    printf ' \033[36m⟳ claude: working...\033[0m' ;;
-    done)       printf ' \033[32m✓ claude: responded\033[0m' ;;
-    permission) printf ' \033[31m⚠ claude: action required\033[0m' ;;
+    working)    printf '\033[36m⟳ claude: working...\033[0m' ;;
+    done)       printf '\033[32m✓ claude: responded\033[0m' ;;
+    permission) printf '\033[31m⚠ claude: action required\033[0m' ;;
   esac
 }
 
@@ -71,7 +71,7 @@ generate_entries() {
     claude_status=$(get_session_claude_status "$session")
     claude_indicator=$(format_claude_status "$claude_status")
     if [ -n "$claude_status" ]; then
-      printf "%s\n  \033[33m%s\033[0m \033[90m%s\033[0m\n  %b\0" "$session" "$branch" "$commit" "$claude_indicator"
+      printf "%s\n%b\n  \033[33m%s\033[0m \033[90m%s\033[0m\0" "$session" "$claude_indicator" "$branch" "$commit"
     else
       printf "%s\n  \033[33m%s\033[0m \033[90m%s\033[0m\0" "$session" "$branch" "$commit"
     fi
